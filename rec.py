@@ -13,7 +13,7 @@ class Predictor(object):
         _, alg = dump.load(model_file)
         self.alg = alg
 
-    def prediect(self, user_id, movie_id):
+    def predict(self, user_id, movie_id):
         """It returns the rate predicted for the user id and movie id.
 
         Args:
@@ -42,5 +42,5 @@ class Predictor(object):
 
 if __name__ == '__main__':
     predictor = Predictor(model_file=REC_MODEL_FILE)
-    print(predictor.prediect(657, 593))
+    print(predictor.predict(657, 593))
     print(predictor.get_movie_neighbors(593))
