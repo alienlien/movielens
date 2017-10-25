@@ -17,7 +17,7 @@ MOVIE_CSV_FILE = os.path.join(DATA_DIR, 'movies.csv')
 RATINGS_CSV_FILE = os.path.join(DATA_DIR, 'ratings.csv')
 TAGS_CSV_FILE = os.path.join(DATA_DIR, 'tags.csv')
 LINKS_CSV_FILE = os.path.join(DATA_DIR, 'links.csv')
-REC_MODEL_FILE = os.path.join(DATA_DIR, 'cf.model')
+REC_MODEL_FILE = os.path.join(DATA_DIR, 'rec.model')
 
 # Load movies data. Note that we user empty string for the movies
 # without genres.
