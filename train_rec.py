@@ -4,35 +4,37 @@
 # collaborative filtering.
 import os.path
 from time import gmtime, strftime
+from docopt import docopt
 import numpy as np
 import pandas as pd
 import surprise as sp
-# from surprise import Reader
-# from surprise import Dataset
-# from surprise import SVD
-# from surprise import accuracy
-# from surprise import dump
 
-# The dir and file to store data.
-DATA_DIR = './ml-20m'
-MOVIE_CSV_FILE = os.path.join(DATA_DIR, 'movies.csv')
-RATINGS_CSV_FILE = os.path.join(DATA_DIR, 'ratings.csv')
-TAGS_CSV_FILE = os.path.join(DATA_DIR, 'tags.csv')
-LINKS_CSV_FILE = os.path.join(DATA_DIR, 'links.csv')
-REC_MODEL_FILE = os.path.join(DATA_DIR, 'rec.model')
-
+# Default number of n-folded.
 NUM_FOLD = 3
 
+usage = """
+Usage:
+    train_rec.py [options]
+
+Options:
+    --data=DIR  The directory contains images [default: ./ml-latest-small/]
+"""
 if __name__ == '__main__':
+    args = docopt(usage, help=True)
+    data_dir = args['--data']
+
+    movie_csv_file = os.path.join(data_dir, 'movies.csv')
+    rating_csv_file = os.path.join(data_dir, 'ratings.csv')
+    rec_model_file = os.path.join(data_dir, 'rec.model')
 
     # Load movies data. Note that we user empty string for the movies
     # without genres.
-    movies = pd.read_csv(MOVIE_CSV_FILE, sep=',')
+    movies = pd.read_csv(movie_csv_file, sep=',')
     movies['genres'] = np.where(movies['genres'] == '(no genres listed)', '',
                                 movies['genres'])
 
     # Load rating data.
-    ratings = pd.read_csv(RATINGS_CSV_FILE, sep=',')
+    ratings = pd.read_csv(rating_csv_file, sep=',')
 
     df = ratings.join(
         movies[['movieId', 'title']].set_index('movieId'),
@@ -46,6 +48,7 @@ if __name__ == '__main__':
 
     print('>> Begin to train data')
     print(strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime()))
+
     sim_options = {
         'name': 'pearson_baseline',
         'user_based': False,
@@ -61,4 +64,4 @@ if __name__ == '__main__':
         sp.accuracy.rmse(alg.test(test_set), verbose=True)
         counter += 1
 
-    sp.dump.dump(REC_MODEL_FILE, algo=alg)
+    sp.dump.dump(rec_model_file, algo=alg)
