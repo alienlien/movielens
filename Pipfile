@@ -12,6 +12,7 @@ pandas = "*"
 scikit-learn = "*"
 scikit-surprise = "*"
 docopt = "*"
+wordcloud = "*"
 
 
 [dev-packages]
