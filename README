@@ -22,4 +22,11 @@ Get Model for recommendation engines:
 - One needs to put the model within the data folder.
 
 Train one's own recommendation engine:
-$ python3 ./train_rec.py --data [data_folder] 
+$ python3 ./train_rec.py --data [data_folder]
+
+To generate the analysis results and corresponding graphs, one needs to use python notebook:
+$ jupyter notebook ./ml-20m.ipynb
+
+TODO:
+- Fetch metadata for movies from imdb.
+- Fix the issue about the dumping of the algorithm for python surprise. It fails for the 4GB limit for the saving of python pickle files. We here use the model trained from the data set 'ml-latest-small' instead.
