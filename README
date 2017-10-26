@@ -15,4 +15,11 @@ Get Database:
 - MovieLens Latest Datasets
   Download link: http://files.grouplens.org/datasets/movielens/ml-latest-small.zip
 - TMDB Dataset
-  https://www.kaggle.com/tmdb/tmdb-movie-metadata/data 
+  https://www.kaggle.com/tmdb/tmdb-movie-metadata/data
+  
+Get Model for recommendation engines:
+- https://drive.google.com/a/gapp.nthu.edu.tw/file/d/0B5Xp_sVDhnl6XzZFZ3VtdVlDMjg/view?usp=sharing
+- One needs to put the model within the data folder.
+
+Train one's own recommendation engine:
+$ python3 ./train_rec.py --data [data_folder] 
